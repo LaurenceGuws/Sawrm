@@ -1,0 +1,7 @@
+Write a hello world file, and save it on the serve.
+
+Test the server out. Use your test_connection function.
+
+Pull this repo into the server "https://github.com/wso2/samples-is.git"
+
+Clean out the working directory. Delete everything.
