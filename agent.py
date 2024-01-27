@@ -1,9 +1,10 @@
 import google.generativeai as genai
 import google.ai.generativelanguage as glm
 
-import handle_response
+import functions.handle_response
 from utils import settings
 from configparser import ConfigParser
+import personas.devs.software_developer
 
 config = ConfigParser()
 config.read('conf\.env')
@@ -11,7 +12,7 @@ config.read('conf\.env')
 API_KEY = config['DEFAULT']['API_KEY']
 genai.configure(api_key=API_KEY)
 safety_settings=settings.safety_settings
-history=settings.history #This will be custom for each agent, teaching it how to recieve and respond with messages.
+history=personas.devs.software_developer.history #This will be custom for each agent, teaching it how to recieve and respond with messages.
 tool = glm.Tool(function_declarations=settings.function_declarations)
 tools = [tool]
 model = genai.GenerativeModel('gemini-pro', tools=tools, safety_settings=safety_settings)
@@ -25,7 +26,7 @@ def chat(prompt, convo):
     response = chat.send_message(prompt, safety_settings=settings.safety_settings)
     while True:
 
-        tools_response = handle_response.extract_function_calls(response)
+        tools_response = functions.handle_response.extract_function_calls(response)
 
         parts = []
         if any(fc_name for fc_name, _ in tools_response):

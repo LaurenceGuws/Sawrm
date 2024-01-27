@@ -40,7 +40,7 @@ function_declarations = [
                         properties={
                             'data': glm.Schema(type=glm.Type.STRING, description="Content to be written to the file."),
                             'file_name': glm.Schema(type=glm.Type.STRING, description="The name of the file to write to with extension."),
-                            'file_path': glm.Schema(type=glm.Type.STRING, description="The path to the directory where the file will be written."),
+                            'file_path': glm.Schema(type=glm.Type.STRING, description="The path to the directory where the file will be written. NEVER ADD THE FILE NAME TO THE PATH< ONLY IT'S LOCATION"),
                         },
                         required=['data', 'file_name', 'file_path']
                     )
